@@ -1,0 +1,38 @@
+File Structure
+
+
+- main.py
+    - generate_structured_data_from_text()
+
+- Functions
+
+    - __init__.py
+
+    - global_variables.py
+
+    - Token_Manipulation.py
+        - set_index()
+        - set_extentions()
+        - make_unique()
+
+    - Vector_Calculation.py
+        - euclidean_distance()
+        - cosine_similarity()
+
+    - Structural_Calculation.py
+        - term_distance()
+        - freq_sum()
+
+    - Compilation_Functions.py
+        - get_relation()
+        - make_pairs()
+        - assign_values()
+
+    - Structure_Greneration.py
+        - make_graph()
+        - make_tree()
+        - make_a_node_dict()
+
+    - Adapter.py
+        - _transform_data()
+        - print_param()

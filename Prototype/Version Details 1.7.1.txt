@@ -1,0 +1,4 @@
+Update for Version 1.7.1 - Refactored Main.py into sub python modules, the code now works for almost all kinds of text.
+
+The filing structure for new refactored main.py is described in FileStructure.txt
+Functions is the new module with all the processing and supporting functions shifted to this module. Main.py now only contains executions code.
