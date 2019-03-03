@@ -6,16 +6,30 @@ from .vector_calculation import cosine_similarity
 from .structural_calculation import term_distance, freq_sum
 from . import global_variables as gv
 
+def get_freq_sorted_dictionary():
+    f = open("../Corpus Frequency Data/20k.txt","r")
+    ranked_words=defaultdict()
+    for l1 in f.readlines():
+        ranked_words[l1[0:-1]]=len(ranked_words)+1
+    return ranked_words
+
 
 def get_relation(token1, token2):
-    output = [(token1, gv.DOC[i], token2) for i in range(token1.i, token2.i) if gv.DOC[i].pos_ == "VERB"]
+    (lrg, sml) = ((token1, token2) if token1.i > token2.i else (token2, token1))
+    output = [(token1, DOC[i], token2) for i in range(sml.i, lrg.i) if DOC[i].pos_ == "VERB"]
+    word_ranking=get_freq_sorted_dictionary()
     if not output:
-        output = (token1, 'has', token2)
+        final_relation = (token1, 'has', token2)
     else:
-        rels = [x[1] for x in output]
-        rel2 = [x for x in rels if x.text not in ["is", "has", "have", "had", "was", "will"]]
-        output = (token1, rels[int(len(rels) / 2)].text, token2)
-    return output
+        rank=[word_ranking[x] for (token1,x,token2) in output if x in word_ranking.keys()]
+        if not rank:
+            rels = [x[1] for x in output]
+            rel2 = [x for x in rels if x.text not in ["is", "has", "have", "had", "was", "will"]]
+            final_relation = (token1, rels[int(len(rels) / 2)].text, token2)
+        else :
+            max_rank=max(rank)
+            final_relation= output[rank.index(max_rank)]
+    return final_relation
 
 # Text to Pairs funtion.
 
