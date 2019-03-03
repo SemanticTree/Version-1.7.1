@@ -74,7 +74,7 @@ function get_wiki_text(title){
         data: {url: encodeURI(title)},
         success: function(data) {
             console.log(data);
-            result = data.responseText;
+            document.getElementById("meaning").innerHTML= data;
             return result;
         }
     });

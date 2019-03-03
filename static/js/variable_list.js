@@ -1,5 +1,5 @@
 var container_id="map-area";
-var cy, display_cy;
+var cy, display_cy,edge_length=200;
 var style=[
 	{
 		"selector":"node",
