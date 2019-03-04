@@ -7,8 +7,7 @@ from .structural_calculation import term_distance, freq_sum
 from . import global_variables as gv
 
 def get_relation(token1, token2):
-    (lrg, sml) = ((token1, token2) if token1.i > token2.i else (token2, token1))
-    output = [(token1, DOC[i], token2) for i in range(sml.i, lrg.i) if DOC[i].pos_ == "VERB"]
+    output = [(token1, gv.DOC[i], token2) for i in range(token1.i, token2.i) if gv.DOC[i].pos_ == "VERB"]
     word_ranking=get_freq_sorted_dictionary()
     if not output:
         final_relation = (token1, 'has', token2)
