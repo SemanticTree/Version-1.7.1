@@ -6,16 +6,20 @@ from .vector_calculation import cosine_similarity
 from .structural_calculation import term_distance, freq_sum
 from . import global_variables as gv
 
-
 def get_relation(token1, token2):
     output = [(token1, gv.DOC[i], token2) for i in range(token1.i, token2.i) if gv.DOC[i].pos_ == "VERB"]
     if not output:
-        output = (token1, 'has', token2)
+        final_relation = (token1, 'has', token2)
     else:
-        rels = [x[1] for x in output]
-        rel2 = [x for x in rels if x.text not in ["is", "has", "have", "had", "was", "will"]]
-        output = (token1, rels[int(len(rels) / 2)].text, token2)
-    return output
+        rank=[gv.WORD_RANKING[x] for (token1,x,token2) in output if x in gv.WORD_RANKING.keys()]
+        if not rank:
+            rels = [x[1] for x in output]
+            rel2 = [x for x in rels if x.text not in ["is", "has", "have", "had", "was", "will"]]
+            final_relation = (token1, rels[int(len(rels) / 2)].text, token2)
+        else :
+            max_rank=max(rank)
+            final_relation= output[rank.index(max_rank)]
+    return final_relation
 
 # Text to Pairs funtion.
 

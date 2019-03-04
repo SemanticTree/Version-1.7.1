@@ -27,9 +27,8 @@ def term_distance(term_a, term_b):
 
     assert term_a._.instance_list is not []
     assert term_b._.instance_list is not []
-
-    ax = [x._.index.wid for x in term_a._.instance_list]
-    bx = [x._.index.wid for x in term_b._.instance_list]
+    ax = [x._.index.wid for x in term_a._.instance_list if not x._.index == None]
+    bx = [x._.index.wid for x in term_b._.instance_list if not x._.index == None]
     min_dist = min_dist_between_two_set(ax, bx)
     value = np.e ** -(min_dist * gv.SENT_RANGE / gv.WORD_RANGE)
     return value
