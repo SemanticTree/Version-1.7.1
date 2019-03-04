@@ -443,7 +443,6 @@ from Functions import global_variables as gv
 def generate_structured_data_from_text(text, threshold_value=0.5,
                                        max_connections_value=5):
     """Returns cytoscape compatible json structure"""
-
     F.print_param(text[:50] + "." * 5 + text[-50:])
 
     F.print_param(f'Threshhold              : {threshold_value}\nMax Connection          : {max_connections_value}')
@@ -453,7 +452,6 @@ def generate_structured_data_from_text(text, threshold_value=0.5,
     pairs = F.make_pairs(processed_text)
     F.set_index()  # only when DOC object is set
     weight_matrix = np.array([0.3, 0.5, 0.2])  # cs, wd, fr
-
     # Skip from here for Module Integration
     a = F.assign_values(pairs, weight_matrix=weight_matrix, )
     g = F.make_graph(a, threshold=threshold_value, max_connections=max_connections_value)
