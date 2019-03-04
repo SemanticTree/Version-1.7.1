@@ -8,7 +8,6 @@ from . import global_variables as gv
 
 def get_relation(token1, token2):
     output = [(token1, gv.DOC[i], token2) for i in range(token1.i, token2.i) if gv.DOC[i].pos_ == "VERB"]
-    word_ranking=get_freq_sorted_dictionary()
     if not output:
         final_relation = (token1, 'has', token2)
     else:
