@@ -151,3 +151,22 @@ function showText(ele){
 	ele.unselect();
 	console.log(origin_sent);
 }
+
+
+function hide_edges(a){
+	cy.nodes().forEach(function(ele,i,eles){
+		var count=0;
+		ele.connectedEdges().forEach(function(ele,i,eles){
+			if(a.includes(ele.data("title"))|| ele.style("visibility")=="hidden"){
+				count++;
+			}
+		});
+		if(count==ele.connectedEdges().length){
+			ele.style("visibility","hidden");
+			ele.connectedEdges().style("visibility","hidden");
+		} 
+	});
+	a.forEach(function(element){
+		cy.edges("[title='"+element+"']").style("visibility","hidden");
+	})
+}
